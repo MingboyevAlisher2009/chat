@@ -18,7 +18,6 @@ import { TiArrowBack, TiArrowBackOutline } from "react-icons/ti";
 import { FiCopy } from "react-icons/fi";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -176,8 +175,8 @@ const MessageContainer = () => {
       return (
         <div key={message._id} data-id={message._id} className="message">
           {showDate && (
-            <div className="text-center w-44 mx-auto relative mb-10 shadow-lg my-2 rounded bg-transparent py-2 text-white">
-              {moment(message.createdAt).format("LL")}
+            <div className="text-center w-44 mx-auto relative mb-10 shadow-lg my-2 rounded-lg bg-background/20 backdrop-blur-md py-2 text-white">
+              {moment(message.createdAt).format("l")}
             </div>
           )}
           {selectedChatType === "contact" && renderDmMessages(message)}

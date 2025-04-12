@@ -61,8 +61,6 @@ const ContactList = ({ contacts, isChannel = false }) => {
     return notification.filter((notif) => notif.sender === contact._id).length;
   };
 
-  console.log(notification);
-
   return (
     <div className="mt-5">
       {contacts.map((contact) => {

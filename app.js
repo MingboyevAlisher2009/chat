@@ -8,9 +8,10 @@ import ContactsRoutes from "./routes/contact.routes.js";
 import MessagesRoute from "./routes/messages.routes.js";
 import ChannelRouter from "./routes/channel.routes.js";
 import setupSocket from "./socket.js";
+import path from "path";
 
 dotenv.config();
-
+const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT || 3001;
 const database_url = process.env.DATABASE_URL;
@@ -34,6 +35,12 @@ app.use("/api/contacts", ContactsRoutes);
 app.use("/api/messages", MessagesRoute);
 app.use("/api/channels", ChannelRouter);
 
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
+
 const server = app.listen(PORT, () => {
   console.log(`Server running on port: http://localhost:${PORT}`);
 });
@@ -41,6 +48,6 @@ const server = app.listen(PORT, () => {
 setupSocket(server);
 
 mongoose
-  .connect(database_url, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(database_url)
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.log(error));

@@ -1,7 +1,7 @@
 import { compare } from "bcrypt";
 import User from "../models/user.model.js";
 import { generateToken } from "../utils/token.js";
-import { renameSync, unlinkSync } from "fs";
+import { existsSync, renameSync, unlinkSync } from "fs";
 
 export const signup = async (req, res) => {
   const { email, password } = req.body;
@@ -20,7 +20,7 @@ export const signup = async (req, res) => {
     const data = await User.create(req.body);
 
     const token = generateToken(email, data._id);
-    
+
     return res.json({
       data,
       token,
@@ -127,8 +127,9 @@ export const removeProfileImage = async (req, res) => {
     const user = await User.findById(userId);
 
     if (!user) res.status(404).json({ error: "User not found" });
+    console.log(existsSync(user.image));
 
-    if (user.image) {
+    if (user.image && existsSync(user.image)) {
       unlinkSync(user.image);
     }
 

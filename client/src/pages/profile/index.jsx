@@ -193,19 +193,23 @@ const Profile = () => {
               />
             </div>
             <div className="flex gap-5 w-full">
-              {colors.map((color, i) => (
-                <div
-                  onClick={() => setselectedColor(i)}
-                  className={`${color} h-8 w-8 rounded-full cursor-pointer transition-all duration-300 
+              {colors.map((color, i) => {
+                const style = color.replace(/__OPACITY__/g, "2a");
+                console.log(style);
+
+                return (
+                  <div
+                    onClick={() => setselectedColor(i)}
+                    className={`${style} h-8 w-8 rounded-full cursor-pointer transition-all duration-300 
                     ${
                       selectedColor === i
                         ? "outline outline-white/50 outline-2"
                         : ""
-                    }
-                  `}
-                  key={i}
-                ></div>
-              ))}
+                    }`}
+                    key={i}
+                  ></div>
+                );
+              })}
             </div>
           </div>
         </div>

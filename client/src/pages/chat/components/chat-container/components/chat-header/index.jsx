@@ -58,7 +58,7 @@ const ChatHeader = () => {
         <div className="flex gap-5 justify-center items-center">
           <button
             onClick={closeChat}
-            className="text-neutral-500 focus:border-none focus:outline-none focus:text-white transition-all duration-300 rounded-full"
+            className="text-neutral-500 focus:border-none cursor-pointer focus:outline-none focus:text-white transition-all duration-300 rounded-full"
           >
             <RiCloseFill className="text-3xl" />
           </button>
