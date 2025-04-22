@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon app.js",
     "start": "node app.js",
-    "build": "npm install && npm install --prefix client && npm run build --prefix client && cp -r client/build ./public"
+    "build": "npm install && npm install --prefix client && npm run build --prefix client && cp -r client/dist ./public"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
