@@ -2,6 +2,7 @@ import express from "express";
 import {
   addProfileImage,
   login,
+  getUserInfoWithINtegrationAcc,
   removeProfileImage,
   signup,
   updateProfile,
@@ -15,6 +16,7 @@ const upload = multer({ dest: "uploads/profiles" });
 
 router.post("/signup", signup);
 router.post("/login", login);
+router.post("/user-with-integration-acc", getUserInfoWithINtegrationAcc);
 router.get("/user-info", AuthMiddlware, userInfo);
 router.post("/upadte-profile", AuthMiddlware, updateProfile);
 router.post(

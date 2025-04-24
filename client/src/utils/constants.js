@@ -4,6 +4,7 @@ export const HOST =
 export const AUTH_ROUTES = `/api/auth`;
 export const SIGNUP_ROUTE = `${AUTH_ROUTES}/signup`;
 export const LOGIN_ROUTE = `${AUTH_ROUTES}/login`;
+export const LOGIN_WITH_INTEGACC_ROUTE = `${AUTH_ROUTES}/user-with-integration-acc`;
 export const GET_USER_INFO = `${AUTH_ROUTES}/user-info`;
 export const UPDATE_PROFILE_ROUTE = `${AUTH_ROUTES}/upadte-profile`;
 export const ADD_PROFILE_IMAGE_ROUTE = `${AUTH_ROUTES}/add-profile-image`;

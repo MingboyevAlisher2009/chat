@@ -6,6 +6,8 @@ import Profile from "./pages/profile";
 import { useAppStore } from "./store";
 import apiClient from "./lib/api.client";
 import { GET_USER_INFO } from "./utils/constants";
+import IntegrationAccc from "./pages/integration-acc";
+import { Loader2 } from "lucide-react";
 
 const PrivateRoute = ({ children }) => {
   const { userInfo } = useAppStore();
@@ -47,7 +49,11 @@ const App = () => {
   }, [userInfo, setUserInfo]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="bg-[#1b1c24] w-full h-screen flex justify-center items-center">
+        <Loader2 size={80} className="text-white animate-spin" />
+      </div>
+    );
   }
 
   return (
@@ -76,6 +82,7 @@ const App = () => {
           </PrivateRoute>
         }
       />
+      <Route path="/integration-account/:email" element={<IntegrationAccc />} />
       <Route path="*" element={<Navigate to={"/auth"} />} />
     </Routes>
   );

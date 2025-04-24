@@ -59,6 +59,26 @@ export const login = async (req, res) => {
   }
 };
 
+export const getUserInfoWithINtegrationAcc = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    const data = await User.findOne({ email });
+
+    if (!data) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.json({ data, success: true, message: "Successfuly" });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export const userInfo = async (req, res) => {
   try {
     const userData = await User.findOne({ email: req.user.email }).select(
