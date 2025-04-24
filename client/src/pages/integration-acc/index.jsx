@@ -23,7 +23,6 @@ const IntegrationAccc = () => {
       if (data.data._id) {
         setSelectedChatData(data.data);
         setSelectedChatType("contact");
-        localStorage.setItem("token", data.token);
       }
       navigation("/chat");
     } catch (error) {
