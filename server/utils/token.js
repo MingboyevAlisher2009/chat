@@ -11,9 +11,11 @@ export const generateToken = (email, userId) => {
   }
 };
 
-export const verifyToken = (token) => {
+export const verifyToken = (res, token) => {
   try {
-    if (!token) throw new Error("The token is invalid");
+    if (!token) {
+      return res.status(403).json({ error: "Forbidden" });
+    }
 
     return jwt.verify(token, process.env.JWT_KEY);
   } catch (error) {

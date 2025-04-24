@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import apiClient from "@/lib/api.client";
 import { useAppStore } from "@/store";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "@/utils/constants";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -16,7 +17,7 @@ const Auth = () => {
     password: "",
     confirmPassword: "",
   });
-  const navigate = useNavigate();
+  const [isLoading, setisLoading] = useState(false);
   const { setUserInfo } = useAppStore();
 
   const validateLogin = () => {
@@ -48,6 +49,7 @@ const Auth = () => {
   };
 
   const handleLogin = async () => {
+    setisLoading(true);
     try {
       if (validateLogin()) {
         const response = await apiClient.post(LOGIN_ROUTE, {
@@ -65,10 +67,13 @@ const Auth = () => {
       }
     } catch (error) {
       toast.error("Email or passworg invalide");
+    } finally {
+      setisLoading(false);
     }
   };
 
   const handleSignUp = async () => {
+    setisLoading(true);
     try {
       if (validateSignUp()) {
         const response = await apiClient.post(SIGNUP_ROUTE, {
@@ -84,6 +89,8 @@ const Auth = () => {
       }
     } catch (error) {
       toast.error("Email, passworg or confirm password invalide");
+    } finally {
+      setisLoading(false);
     }
   };
 
@@ -132,8 +139,18 @@ const Auth = () => {
                 type="password"
                 className="rounded-full outline-none"
               />
-              <Button onClick={handleLogin} className="rouunded-full">
-                Login
+              <Button
+                disabled={isLoading}
+                onClick={handleLogin}
+                className="rouunded-full"
+              >
+                {isLoading ? (
+                  <div>
+                    <Loader2 className="animate-spin" />
+                  </div>
+                ) : (
+                  "Login"
+                )}
               </Button>
             </TabsContent>
             <TabsContent className="flex flex-col gap-5 " value={"signup"}>
@@ -160,8 +177,18 @@ const Auth = () => {
                 type="password"
                 className="rounded-full outline-none"
               />
-              <Button onClick={handleSignUp} className="rouunded-full">
-                Sign up
+              <Button
+                disabled={isLoading}
+                onClick={handleSignUp}
+                className="rouunded-full"
+              >
+                {isLoading ? (
+                  <div>
+                    <Loader2 className="animate-spin" />
+                  </div>
+                ) : (
+                  "Sign up"
+                )}
               </Button>
             </TabsContent>
           </Tabs>

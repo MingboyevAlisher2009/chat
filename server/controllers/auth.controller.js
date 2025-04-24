@@ -61,11 +61,18 @@ export const login = async (req, res) => {
 
 export const userInfo = async (req, res) => {
   try {
-    const userData = await User.findById(req.user.userId).select("-password");
+    const userData = await User.findOne({ email: req.user.email }).select(
+      "-password"
+    );
+    console.log(userData);
 
-    if (!userData) res.status(404).json({ error: "User not found!" });
+    if (!userData) {
+      return res.status(404).json({ error: "User not found!" });
+    }
     res.json(userData);
   } catch (error) {
+    console.log(error);
+
     return res.status(500).json(error);
   }
 };

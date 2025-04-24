@@ -11,7 +11,7 @@ const AuthMiddleware = (req, res, next) => {
     return res.status(403).json({ error: "Forbidden" });
   }
 
-  const data = verifyToken(token);
+  const data = verifyToken(res, token);
 
   if (data instanceof Error) {
     return res.status(401).json({ error: "Invalid token" });
