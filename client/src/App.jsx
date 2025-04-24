@@ -82,7 +82,14 @@ const App = () => {
           </PrivateRoute>
         }
       />
-      <Route path="/integration-account/:email" element={<IntegrationAccc />} />
+      <Route
+        path="/integration-account/:email"
+        element={
+          <PrivateRoute>
+            <IntegrationAccc />
+          </PrivateRoute>
+        }
+      />
       <Route path="*" element={<Navigate to={"/auth"} />} />
     </Routes>
   );
